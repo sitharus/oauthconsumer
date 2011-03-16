@@ -139,7 +139,9 @@
 	}
 	if (self.files) {
 		for (NSString *key in self.files) {
-			[request attachFileWithName:@"file" filename:NSLocalizedString(@"Photo.jpg", @"") data:[self.files objectForKey:key]];
+            NSLog(@"File upload disabled");
+            abort();
+			//[request attachFileWithName:@"file" filename:NSLocalizedString(@"Photo.jpg", @"") data:[self.files objectForKey:key]];
 		}
 	}
 	fetcher = [[OADataFetcher alloc] init];

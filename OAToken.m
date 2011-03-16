@@ -39,7 +39,7 @@
 
 @implementation OAToken
 
-@synthesize key, secret, session, duration, attributes, forRenewal;
+@synthesize key, secret, session, duration, attributes, forRenewal, verifier;
 
 #pragma mark init
 
@@ -60,7 +60,7 @@
 	self.secret = aSecret;
 	self.session = aSession;
 	self.duration = aDuration;
-	self.attributes = theAttributes;
+	self.attributes = [theAttributes mutableCopy];
 	created = [creation retain];
 	renewable = renew;
 	forRenewal = NO;
@@ -219,6 +219,9 @@
 		if ([self isForRenewal]) {
 			[params setObject:session forKey:@"oauth_session_handle"];
 		}
+        if (verifier) {
+            [params setObject:verifier forKey:@"oauth_verifier"];
+        }
 	} else {
 		if (duration) {
 			[params setObject:[duration stringValue] forKey: @"oauth_token_duration"];

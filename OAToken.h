@@ -30,6 +30,7 @@
 	NSString *key;
 	NSString *secret;
 	NSString *session;
+    NSString *verifier;
 	NSNumber *duration;
 	NSMutableDictionary *attributes;
 	NSDate *created;
@@ -40,8 +41,9 @@
 @property(retain, readwrite) NSString *secret;
 @property(retain, readwrite) NSString *session;
 @property(retain, readwrite) NSNumber *duration;
-@property(retain, readwrite) NSMutableDictionary *attributes;
+@property(retain, readwrite) NSDictionary *attributes;
 @property(readwrite, getter=isForRenewal) BOOL forRenewal;
+@property(retain, readwrite) NSString *verifier;
 
 - (id)initWithKey:(NSString *)aKey secret:(NSString *)aSecret;
 - (id)initWithKey:(NSString *)aKey secret:(NSString *)aSecret session:(NSString *)aSession
