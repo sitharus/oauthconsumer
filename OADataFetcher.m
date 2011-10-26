@@ -43,6 +43,10 @@
 	[super dealloc];
 }
 
+- (void)cancel {
+    self.delegate = nil;
+}
+
 /* Protocol for async URL loading */
 - (void)connection:(NSURLConnection *)aConnection didReceiveResponse:(NSURLResponse *)aResponse {
 	[response release];
@@ -57,7 +61,7 @@
 															didSucceed:NO];
 
 	[self.delegate performSelector:didFailSelector withObject:ticket withObject:error];
-    [ticket release];
+    [self.delegate release];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {

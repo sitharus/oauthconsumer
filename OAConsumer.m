@@ -33,8 +33,8 @@
 
 - (id)initWithKey:(const NSString *)aKey secret:(const NSString *)aSecret {
 	[super init];
-	self.key = [aKey retain];
-	self.secret = [aSecret retain];
+	self.key = [aKey copy];
+	self.secret = [aSecret copy];
 	return self;
 }
 
