@@ -30,8 +30,9 @@
 @implementation OADataFetcher
 @synthesize delegate;
 - (id)init {
-	[super init];
-	responseData = [[NSMutableData alloc] init];
+	if ((self = [super init]) != nil) {
+        responseData = [[NSMutableData alloc] init];
+    }
 	return self;
 }
 
@@ -61,7 +62,8 @@
 															didSucceed:NO];
 
 	[self.delegate performSelector:didFailSelector withObject:ticket withObject:error];
-    [self.delegate release];
+    [ticket release];
+    self.delegate = nil;
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
@@ -76,6 +78,7 @@
 
 	[self.delegate performSelector:didFinishSelector withObject:ticket withObject:responseData];
     [ticket release];
+    self.delegate = nil;
 }
 
 - (void)fetchDataWithRequest:(OAMutableURLRequest *)aRequest delegate:(id)aDelegate didFinishSelector:(SEL)finishSelector didFailSelector:(SEL)failSelector {

@@ -97,7 +97,9 @@ static unsigned char workspace[64];
     state[3] += d;
     state[4] += e;
     /* Wipe variables */
+#ifndef __clang_analyzer__
     a = b = c = d = e = 0;
+#endif
 }
 
 
@@ -158,7 +160,9 @@ unsigned char finalcount[8];
          ((context->state[i>>2] >> ((3-(i & 3)) * 8) ) & 255);
     }
     /* Wipe variables */
+#ifndef __clang_analyzer__
     i = j = 0;
+#endif
     memset(context->buffer, 0, 64);
     memset(context->state, 0, 20);
     memset(context->count, 0, 8);

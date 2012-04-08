@@ -43,34 +43,35 @@
 			token:(OAToken *)aToken
             realm:(NSString *)aRealm
 signatureProvider:(id<OASignatureProviding, NSObject>)aProvider {
-    [super initWithURL:aUrl
-           cachePolicy:NSURLRequestReloadIgnoringCacheData
-       timeoutInterval:10.0];
-    
-    consumer = [aConsumer retain];
-    
-    // empty token for Unauthorized Request Token transaction
-    if (aToken == nil) {
-        token = [[OAToken alloc] init];
-    } else {
-        token = [aToken retain];
+	if ((self = [super initWithURL:aUrl
+                       cachePolicy:NSURLRequestReloadIgnoringCacheData
+                   timeoutInterval:10.0]) != nil) {
+        
+        consumer = [aConsumer retain];
+        
+        // empty token for Unauthorized Request Token transaction
+        if (aToken == nil) {
+            token = [[OAToken alloc] init];
+        } else {
+            token = [aToken retain];
+        }
+        
+        if (aRealm == nil) {
+            realm = @"";
+        } else {
+            realm = [aRealm copy];
+        }
+        
+        // default to HMAC-SHA1
+        if (aProvider == nil) {
+            signatureProvider = [[OAHMAC_SHA1SignatureProvider alloc] init];
+        } else {
+            signatureProvider = [aProvider retain];
+        }
+        
+        [self _generateTimestamp];
+        [self _generateNonce];
     }
-    
-    if (aRealm == nil) {
-        realm = @"";
-    } else {
-        realm = [aRealm copy];
-    }
-      
-    // default to HMAC-SHA1
-    if (aProvider == nil) {
-        signatureProvider = [[OAHMAC_SHA1SignatureProvider alloc] init];
-    } else {
-        signatureProvider = [aProvider retain];
-    }
-    
-    [self _generateTimestamp];
-    [self _generateNonce];
     
     return self;
 }
@@ -84,14 +85,15 @@ signatureProvider:(id<OASignatureProviding, NSObject>)aProvider {
 signatureProvider:(id<OASignatureProviding, NSObject>)aProvider
             nonce:(NSString *)aNonce
         timestamp:(NSString *)aTimestamp {
-    [self initWithURL:aUrl
-             consumer:aConsumer
-                token:aToken
-                realm:aRealm
-    signatureProvider:aProvider];
+    if ((self = [self initWithURL:aUrl
+                         consumer:aConsumer
+                            token:aToken
+                            realm:aRealm
+                signatureProvider:aProvider]) != nil) {
     
-    nonce = [aNonce copy];
-    timestamp = [aTimestamp copy];
+        nonce = [aNonce copy];
+        timestamp = [aTimestamp copy];
+    }
     
     return self;
 }
