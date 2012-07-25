@@ -39,12 +39,6 @@
 	return self;
 }
 
-- (void)dealloc {
-	[key release];
-	[secret release];
-	[super dealloc];
-}
-
 - (BOOL)isEqual:(id)object {
 	if ([object isKindOfClass:[self class]]) {
 		return [self isEqualToConsumer:(OAConsumer*)object];

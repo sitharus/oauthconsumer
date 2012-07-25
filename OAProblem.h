@@ -26,15 +26,15 @@ enum {
 
 @property (retain, readonly) const NSString *problem;
 
-- (id)initWithProblem:(NSString *)aProblem;
-- (id)initWithResponseBody:(NSString *)response;
+- (id)initWithProblem:(const NSString *)aProblem;
+- (id)initWithResponseBody:(const NSString *)response;
 
 - (BOOL)isEqualToProblem:(OAProblem *)aProblem;
 - (BOOL)isEqualToString:(NSString *)aProblem;
 - (BOOL)isEqualTo:(id)aProblem;
 - (int)code;
 
-+ (OAProblem *)problemWithResponseBody:(NSString *)response;
++ (OAProblem *)problemWithResponseBody:(const NSString *)response;
 
 + (NSArray *)validProblems;
 
