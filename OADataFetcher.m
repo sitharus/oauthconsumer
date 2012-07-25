@@ -36,13 +36,6 @@
 	return self;
 }
 
-- (void)dealloc {
-	[connection release];
-	[response release];
-	[responseData release];
-	[request release];
-	[super dealloc];
-}
 
 - (void)cancel {
     self.delegate = nil;
@@ -50,8 +43,7 @@
 
 /* Protocol for async URL loading */
 - (void)connection:(NSURLConnection *)aConnection didReceiveResponse:(NSURLResponse *)aResponse {
-	[response release];
-	response = [aResponse retain];
+	response = aResponse;
 	[responseData setLength:0];
 }
 	
@@ -62,7 +54,6 @@
 															didSucceed:NO];
 
 	[self.delegate performSelector:didFailSelector withObject:ticket withObject:error];
-    [ticket release];
     self.delegate = nil;
 }
 
@@ -77,12 +68,11 @@
 															didSucceed:[(NSHTTPURLResponse *)response statusCode] < 400];
 
 	[self.delegate performSelector:didFinishSelector withObject:ticket withObject:responseData];
-    [ticket release];
     self.delegate = nil;
 }
 
 - (void)fetchDataWithRequest:(OAMutableURLRequest *)aRequest delegate:(id)aDelegate didFinishSelector:(SEL)finishSelector didFailSelector:(SEL)failSelector {
-	request = [aRequest retain];
+	request = aRequest;
     self.delegate = aDelegate;
     didFinishSelector = finishSelector;
     didFailSelector = failSelector;

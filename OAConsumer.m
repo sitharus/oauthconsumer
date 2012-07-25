@@ -33,8 +33,8 @@
 
 - (id)initWithKey:(const NSString *)aKey secret:(const NSString *)aSecret {
 	if ((self = [super init]) != nil) {
-        self.key = [[aKey copy] autorelease];
-        self.secret = [[aSecret copy] autorelease];
+        self.key = [aKey copy];
+        self.secret = [aSecret copy];
     }
 	return self;
 }

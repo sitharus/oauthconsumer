@@ -29,17 +29,14 @@
 
 
 @interface OAServiceTicket : NSObject {
-@private
-    OAMutableURLRequest *request;
-    NSURLResponse *response;
-	NSData *data;
+@private 
     BOOL didSucceed;
 }
-@property(readonly) OAMutableURLRequest *request;
-@property(readonly) NSURLResponse *response;
-@property(readonly) NSData *data;
+@property(retain, readonly) OAMutableURLRequest *request;
+@property(retain, readonly) NSURLResponse *response;
+@property(retain, readonly) NSData *data;
 @property(readonly) BOOL didSucceed;
-@property(readonly) NSString *body;
+@property(retain, readonly) NSString *body;
 
 - (id)initWithRequest:(OAMutableURLRequest *)aRequest response:(NSURLResponse *)aResponse data:(NSData *)aData didSucceed:(BOOL)success;
 

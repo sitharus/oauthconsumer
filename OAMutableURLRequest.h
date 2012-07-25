@@ -38,13 +38,11 @@
     OAConsumer *consumer;
     OAToken *token;
     NSString *realm;
-    NSString *signature;
     id<OASignatureProviding,NSObject> signatureProvider;
     NSString *nonce;
     NSString *timestamp;
-    NSString *callbackUrl;
 }
-@property(readonly) NSString *signature;
+@property(retain, readonly) NSString *signature;
 @property(readonly) NSString *nonce;
 @property(retain) NSString *callbackUrl;
 

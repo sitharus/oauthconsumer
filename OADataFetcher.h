@@ -37,7 +37,7 @@
     SEL didFinishSelector;
     SEL didFailSelector;
 }
-@property(nonatomic, retain) id delegate;
+@property(retain, nonatomic) id delegate;
 - (void)fetchDataWithRequest:(OAMutableURLRequest *)aRequest delegate:(id)aDelegate didFinishSelector:(SEL)finishSelector didFailSelector:(SEL)failSelector;
 - (void)cancel;
 @end

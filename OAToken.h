@@ -27,11 +27,6 @@
 
 @interface OAToken : NSObject {
 @protected
-	NSString *key;
-	NSString *secret;
-	NSString *session;
-    NSString *verifier;
-	NSNumber *duration;
 	NSMutableDictionary *attributes;
 	NSDate *created;
 	BOOL renewable;
@@ -41,7 +36,7 @@
 @property(retain, readwrite) NSString *secret;
 @property(retain, readwrite) NSString *session;
 @property(retain, readwrite) NSNumber *duration;
-@property(nonatomic, retain, readwrite) NSDictionary *attributes;
+@property(retain, nonatomic, readwrite) NSDictionary *attributes;
 @property(readwrite, getter=isForRenewal) BOOL forRenewal;
 @property(retain, readwrite) NSString *verifier;
 
