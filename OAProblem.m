@@ -8,16 +8,16 @@
 
 #import "OAProblem.h"
 
-const NSString *signature_method_rejected = @"signature_method_rejected";
-const NSString *parameter_absent = @"parameter_absent";
-const NSString *version_rejected = @"version_rejected";
-const NSString *consumer_key_unknown = @"consumer_key_unknown";
-const NSString *token_rejected = @"token_rejected";
-const NSString *signature_invalid = @"signature_invalid";
-const NSString *nonce_used = @"nonce_used";
-const NSString *timestamp_refused = @"timestamp_refused";
-const NSString *token_expired = @"token_expired";
-const NSString *token_not_renewable = @"token_not_renewable";
+NSString *signature_method_rejected = @"signature_method_rejected";
+NSString *parameter_absent = @"parameter_absent";
+NSString *version_rejected = @"version_rejected";
+NSString *consumer_key_unknown = @"consumer_key_unknown";
+NSString *token_rejected = @"token_rejected";
+NSString *signature_invalid = @"signature_invalid";
+NSString *nonce_used = @"nonce_used";
+NSString *timestamp_refused = @"timestamp_refused";
+NSString *token_expired = @"token_expired";
+NSString *token_not_renewable = @"token_not_renewable";
 
 @implementation OAProblem
 
@@ -25,9 +25,9 @@ const NSString *token_not_renewable = @"token_not_renewable";
 
 - (id)initWithPointer:(const NSString *) aPointer
 {
-	if ((self = [super init]) != nil) {
-        problem = aPointer;
-    }
+	if ((self = [super init])) {
+		problem = [aPointer copy];
+	}
 	return self;
 }
 
